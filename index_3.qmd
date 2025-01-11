@@ -1,0 +1,143 @@
+---
+title: "Analisis Pengaruh Nilai Tukar Rupiah Terhadap Volume Ekspor Indonesia Ke RRT (Tahun 2018-2019)"
+subtitle: "Metode Penelitian Politeknik APP Jakarta"
+author: "Anindya Belva Carissa"
+date: 2025-01-11
+number-sections: true
+format:
+  html: default
+  docx: default
+---
+
+## Pendahuluan
+
+### Latar belakang
+
+Ekspor memainkan peranan penting dalam perekonomian Indonesia, terutama dalam menjalin hubungan perdagangan dengan negara mitra utama seperti Republik Rakyat Tiongkok (RRT). Dalam beberapa tahun terakhir, RRT telah menjadi salah satu mitra dagang terbesar Indonesia, baik dalam hal impor maupun ekspor. Volume ekspor Indonesia ke RRT mencakup berbagai komoditas, seperti minyak kelapa sawit, batu bara, dan hasil tambang lainnya, yang memberikan kontribusi signifikan terhadap pendapatan nasional.
+
+Salah satu faktor yang diyakini memengaruhi kinerja ekspor adalah nilai tukar mata uang. Nilai tukar memiliki peran penting dalam menentukan daya saing harga barang ekspor Indonesia di pasar internasional. Ketika nilai tukar rupiah melemah terhadap yuan, harga barang ekspor Indonesia menjadi lebih kompetitif. Sebaliknya, ketika rupiah menguat, harga barang ekspor Indonesia cenderung lebih mahal sehingga dapat mengurangi volume ekspor.
+
+### Ruang lingkup
+
+Dengan perkembangan ekonomi global yang dinamis dan fluktuasi nilai tukar yang sering terjadi, penting bagi Indonesia untuk memahami bagaimana nilai tukar memengaruhi volume ekspor, terutama ke RRT. Penelitian ini bertujuan untuk memberikan analisis kuantitatif mengenai hubungan antara nilai tukar rupiah terhadap yuan dengan volume ekspor Indonesia ke RRT selama periode 2019-2023, menggunakan metode regresi linear sederhana. Studi ini diharapkan dapat memberikan wawasan bagi para pemangku kebijakan dan pelaku usaha dalam merumuskan strategi perdagangan yang lebih efektif.
+
+### Rumusan masalah
+
+1.	Bagaimana pengaruh nilai tukar rupiah terhadap yuan terhadap volume ekspor Indonesia ke RRT pada periode 2018-2023?
+2.	Seberapa kuat hubungan antara fluktuasi nilai tukar dengan perubahan volume ekspor ke RRT?
+
+### Tujuan penelitian
+
+1.	Menganalisis pengaruh nilai tukar rupiah terhadap yuan terhadap volume ekspor Indonesia ke RRT pada periode 2018-2023.
+2.	Menentukan kekuatan hubungan antara fluktuasi nilai tukar dengan volume ekspor Indonesia ke RRT.
+
+### Package
+
+Ini tidak wajib ada di tulisan anda tapi anda dapat menunjukkan Packages yang digunakan antara lain sebagai berikut:
+
+```{r}
+#| warning: false
+#| echo: true
+library(tidyverse)
+library(readxl)
+library(WDI) # tambahkan library lain jika diperlukan
+```
+
+## Studi pustaka
+
+Nilai tukar merupakan harga suatu mata uang dalam bentuk mata uang lainnya. Nilai tukar memiliki peran penting dalam perdagangan internasional karena memengaruhi harga barang dan jasa yang diperdagangkan di pasar global. Ketika nilai tukar suatu negara melemah, barang ekspor menjadi lebih murah di pasar internasional, sehingga dapat meningkatkan daya saing produk negara tersebut. Sebaliknya, penguatan nilai tukar dapat membuat harga barang ekspor menjadi lebih mahal, sehingga mengurangi daya saingnya.
+
+Dalam konteks perdagangan internasional, fluktuasi nilai tukar sering kali menjadi perhatian utama bagi pelaku bisnis dan pemerintah karena dampaknya terhadap volume ekspor dan impor. Stabilitas nilai tukar dianggap sebagai salah satu faktor kunci dalam menciptakan lingkungan perdagangan yang kondusif.
+
+Hubungan antara nilai tukar dan ekspor telah menjadi subjek berbagai penelitian ekonomi. Secara umum, pelemahan nilai tukar suatu negara dapat meningkatkan ekspor karena harga barang menjadi lebih kompetitif di pasar global. Namun, hubungan ini tidak selalu linier, karena faktor lain seperti kualitas produk, permintaan global, dan kebijakan perdagangan juga memainkan peran penting.
+
+Dalam kasus Indonesia, nilai tukar rupiah terhadap yuan memiliki pengaruh signifikan terhadap volume ekspor ke RRT, mengingat RRT adalah salah satu mitra dagang utama Indonesia. Oleh karena itu, memahami hubungan ini sangat penting untuk mengembangkan strategi perdagangan yang lebih efektif.
+
+## Metode penelitian
+
+### Data
+
+|Tahun |Jumlah Ekspor |Nilai Tukar|
+|------|--------------|-----------|
+|2018  |23664972,04   | 2.100     |
+|2019  |24173849,4    | 2.200     |
+|2020  |27209768,82   | 2.225     |
+|2021  |49173944,17   | 2.258     |
+|2022  |32492087,64   | 2.300     |
+|2023  |29201352,99   | 2.302     |
+
+penelitian ini menggunakan data nilai tukar rupiah terhadap yuan yang mempengaruhi volume ekspor dari tahun 2018-2019
+
+```{r}
+library(readxl)
+list.files(pattern = "DATAKU.xlsx")
+dat<-read_excel("C:/Users/ThinkPad/Downloads/Semester 3/GITHUB/DATAKU.xlsx")
+reg<-lm(jey~ntx,data=dat)
+summary(reg)
+
+ggplot(dat, aes(x = ntx, y = jey)) +
+  geom_point(color = "blue", size = 3) +  # Titik scatter
+  geom_smooth(method = "lm", color = "red", se = TRUE) +  # Garis regresi linier
+  labs(
+    title = "Scatterplot NTX vs JEY dengan Garis Regresi",
+    x = "NTX (Variabel Independen)",
+    y = "JEY (Variabel Dependen)"
+  ) +
+  theme_minimal() 
+```
+
+### Metode analisis
+
+Metode yang dipilih adalah regresi univariat atau Ordinary Least Square (OLS) dengan 2 variabel independen. Penelitian ini merbaksud mencari hubungan antara ntx dan jey. Spesifikasi yang dilakukan adalah:
+
+$$
+y_{t}=\beta_0 + \beta_1 x_t+\mu_t
+$$ di mana $y_t$ adalah hwy dan $x_t$ adalah cty.
+
+## Pembahasan
+
+### Pembahasan masalah
+# Menampilkan data
+
+| Tahun|      jey|  ntx|
+|-----:|--------:|----:|
+|  2018| 23664972| 2200|
+|  2019| 24173849| 2100|
+|  2020| 27209769| 2225|
+|  2021| 49173944| 2258|
+|  2022| 32492088| 2300|
+|  2023| 29201353| 2302|
+
+### Analisis masalah
+
+Hasil regresinya adalah
+
+```{r}
+library(readxl)
+list.files(pattern = "DATAKU.xlsx")
+dat<-read_excel("C:/Users/ThinkPad/Downloads/Semester 3/GITHUB/DATAKU.xlsx")
+reg<-lm(jey~ntx,data=dat)
+summary(reg)
+
+```
+
+## Kesimpulan
+
+Berdasarkan hasil regresi ini, tidak ada bukti yang cukup untuk menunjukkan bahwa nilai tukar rupiah (ntx) secara signifikan mempengaruhi jumlah ekspor ke RRT (jey) dalam periode yang dianalisis. Model yang dihasilkan memiliki daya penjelasan yang rendah, dan variabel nilai tukar rupiah tampaknya tidak berpengaruh secara signifikan terhadap volume ekspor ke RRT dalam data ini.
+
+Untuk analisis lebih lanjut, mungkin diperlukan model yang lebih kompleks atau penambahan variabel lain yang dapat mempengaruhi hubungan ini, seperti faktor-faktor ekonomi lainnya.
+
+
+## Referensi
+
+Badan Pusat Statistik. (2023). Ekspor dan impor Indonesia menurut negara tujuan utama 2018-2023. Badan Pusat Statistik.
+
+Bank Indonesia. (2023). Data nilai tukar rupiah terhadap mata uang asing 2018-2023. Bank Indonesia.
+
+World Bank. (2023). World development indicators: Exchange rates and trade data. The World Bank.
+
+Harahap, S. D., & Santoso, I. (2021). Pengaruh nilai tukar terhadap ekspor dan impor Indonesia: Analisis data panel. Jurnal Ekonomi dan Keuangan Indonesia, 67(2), 120-132.
+
+Prasetyo, B., & Yulianto, A. (2022). Hubungan nilai tukar dan volume perdagangan internasional Indonesia ke RRT. Jurnal Perdagangan dan Ekonomi, 14(1), 56-68.
+
+Safitri, R., & Nugraha, D. (2020). Volatilitas nilai tukar rupiah terhadap perdagangan bilateral Indonesia-China. Jurnal Ekonomi Internasional, 8(3), 45-58.
